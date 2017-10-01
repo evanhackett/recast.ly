@@ -11,12 +11,16 @@ class App extends React.Component {
     this.setState({currentVideo: video});
   }
 
+  updateVideos(videos) {
+    this.setState({videoList: videos});
+  }
+
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search search_cb={this.updateVideos.bind(this)}/>
           </div>
         </nav>
         <div className="row">
@@ -24,7 +28,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoList} onClick={(video) => this.changeVideo(video)} />
+            <VideoList videos={this.state.videoList} onClick={this.changeVideo.bind(this)} />
           </div>
         </div>
       </div>
