@@ -6,12 +6,14 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "babel . --watch --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
-    "test": "live-server --open=./SpecRunner.html --port=8081",
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"
+    "start": "babel ./client --watch --out-dir ./client/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
+    "test": "live-server --open=./client/SpecRunner.html --port=8081",
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "build": "babel ./client --out-dir ./client/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
+    "express": "^4.16.1",
     "jquery": "^2.2.1",
     "lodash": "^4.6.1",
     "react": "^0.14.7",
