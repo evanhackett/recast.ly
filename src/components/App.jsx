@@ -1,10 +1,19 @@
 class App extends React.Component {
   constructor() {
     super();
+
     this.state = {
-      videoList: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]
+      videoList: [],
+      currentVideo: null
     };
+
+    // load some initial videos using empty string as search
+    window.searchYouTube({query: ''}, videos => {
+      this.setState({
+        videoList: videos.slice(1),
+        currentVideo: videos[0]
+      });
+    });
   }
 
   changeVideo(video) {
@@ -16,6 +25,20 @@ class App extends React.Component {
   }
 
   render() {
+    // don't render unless there is video data
+    if (_.isNil(this.state.currentVideo)) {
+      return (
+        <div>
+          <nav className="navbar">
+            <div className="col-md-6 offset-md-3">
+              <Search search_cb={this.updateVideos.bind(this)}/>
+            </div>
+          </nav>
+          <div>Loading...</div>
+        </div>
+      );
+    }
+
     return (
       <div>
         <nav className="navbar">
